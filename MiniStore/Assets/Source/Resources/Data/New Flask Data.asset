@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c9c6d3395fa634687e3a2dbcbe10fc, type: 3}
+  m_Name: New Flask Data
+  m_EditorClassIdentifier: 
+  _yellow: {fileID: 7215831522462212096, guid: 1955d785d7ff1eb4f8c009cdbea99c0a, type: 3}
+  _blue: {fileID: 5630588829690347058, guid: c31481959b0bb6d4188bfb734e1084f0, type: 3}
+  _red: {fileID: 4133170130281080894, guid: 53f6d4427ec64104cb37b71113aae1c8, type: 3}
+  _green: {fileID: 8689292574732315421, guid: 6668ab171f32b244cb4171d9bfd98a97, type: 3}
+  _flaskOffset: 0.1
