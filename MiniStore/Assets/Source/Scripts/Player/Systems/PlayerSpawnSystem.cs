@@ -10,12 +10,12 @@ namespace Assets.Source.Scripts.Player.Systems
     public class PlayerSpawnSystem : IEcsInitSystem
     {
         private EcsWorld _world = null;
-        private const string PLAYER_PATH = "Prefabs/Player/Player";
+        private const string PLAYER_PATH = "Player";
+        private IAssetLoader _loader;
 
         public void Init()
         {
-            var loader = new ResourcesAssetLoader();
-            var playerPrefab = loader.Load<PlayerEntity>(PLAYER_PATH);
+            var playerPrefab = _loader.LoadMonoBehaviour<PlayerEntity>(PLAYER_PATH);
             var player = Object.Instantiate(playerPrefab);
 
             player.Entity = _world.NewEntity();

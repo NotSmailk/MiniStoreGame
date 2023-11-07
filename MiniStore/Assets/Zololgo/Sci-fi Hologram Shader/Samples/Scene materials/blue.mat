@@ -104,7 +104,7 @@ Material:
     - _3: 0
     - _4: 100
     - _Advanced: 0
-    - _Brightness: 2
+    - _Brightness: 3
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -116,8 +116,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimFalloff: 0.3
-    - _RimStrenght: 1
+    - _RimFalloff: 0.5
+    - _RimStrenght: 2
     - _ScanStr: 0.5
     - _ScanStr2: 0.5
     - _Shading: 0.25

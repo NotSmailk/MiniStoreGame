@@ -32,8 +32,8 @@ namespace Client
         private EcsSystems _startSystems;
         private EcsSystems _uiSystems;
         private List<EcsSystems> _systems;
-        private FlasksData _flasks;
         private StandData _standsData;
+        private FlasksData _flasks;
         private IAssetLoader _loader;
         private GameProgress _progress;
         private bool _isInitialized = false;
@@ -43,14 +43,17 @@ namespace Client
             _progress = new GameProgress();
             _progress.AddToStart(StartGame);
             _progress.AddScoreChange(_panel.ShowScore);
-            _loader = new ResourcesAssetLoader();
+            _loader = new AddressablesAssetLoader();
             _systems = new();
             _world = new EcsWorld();
             _pausableSystems = new EcsSystems(_world);
             _startSystems = new EcsSystems(_world);
             _uiSystems = new EcsSystems(_world);
-            _flasks = _loader.Load<FlasksData>("Data/New Flask Data");
-            _standsData = _loader.Load<StandData>("Data/New Stands Data");
+            _standsData = _loader.LoadScriptableObject<StandData>("Data/New Stands Data");
+            _flasks = _loader.LoadScriptableObject<FlasksData>("Data/New Flask Data");
+            _flasks.Loader = _loader;
+            _flasks.InitLib();
+            FixCamera();
 
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world); 
@@ -64,6 +67,38 @@ namespace Client
             InitStartSystems();
             InitPausableSystems();
             InitUISystems();
+        }
+
+        public void FixCamera()
+        {
+            float targetaspect = 9.0f / 16.0f;
+            float windowaspect = (float)Screen.width / (float)Screen.height;
+            float scaleheight = windowaspect / targetaspect;
+
+            if (scaleheight < 1.0f)
+            {
+                Rect rect = _mainCamera.rect;
+
+                rect.width = 1.0f;
+                rect.height = scaleheight;
+                rect.x = 0;
+                rect.y = (1.0f - scaleheight) / 2.0f;
+
+                _mainCamera.rect = rect;
+            }
+            else
+            {
+                float scalewidth = 1.0f / scaleheight;
+
+                Rect rect = _mainCamera.rect;
+
+                rect.width = scalewidth;
+                rect.height = 1.0f;
+                rect.x = (1.0f - scalewidth) / 2.0f;
+                rect.y = 0;
+
+                _mainCamera.rect = rect;
+            }
         }
 
         public void StartGame()
@@ -120,6 +155,7 @@ namespace Client
                 .Inject(_standsData)
                 .Inject(_panel)
                 .Inject(_mainCamera)
+                .Inject(_loader)
                 .Init();
 
             _systems.Add(_startSystems);
@@ -130,7 +166,6 @@ namespace Client
             _pausableSystems
                 .Add(new PhoneInputSystem())
                 .Add(new MoveSystem())
-                .Add(new StackControlSystem())
                 .Add(new RemoveItemFromStackCheckerSystem())
                 .Add(new StandItemProducingSystem())
                 .Add(new RestartProducingSystem())

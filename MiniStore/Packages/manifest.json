@@ -3,6 +3,7 @@
     "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git",
     "com.leopotam.ecs-ui": "https://github.com/Leopotam/ecs-ui.git",
     "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git",
+    "com.unity.addressables": "1.21.19",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.ide.rider": "3.0.24",
